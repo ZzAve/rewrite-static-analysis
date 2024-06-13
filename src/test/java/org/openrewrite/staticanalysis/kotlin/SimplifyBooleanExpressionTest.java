@@ -111,4 +111,19 @@ class SimplifyBooleanExpressionTest implements RewriteTest {
           )
         );
     }
+    @Test
+    void nullableField() {
+        rewriteRun(
+          kotlin(
+            """
+              data class Todo(val completed: Boolean?)
+              fun main() {
+                  val todo = Todo(null)
+                  val isCompleted: Boolean = todo.completed == true
+              }
+              """
+          )
+        );
+    }
+
 }
